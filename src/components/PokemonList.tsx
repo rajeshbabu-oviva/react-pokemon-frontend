@@ -50,8 +50,6 @@ const PokemonList: React.FC<IPokemonSearchParams> = ({
     <PokemonListContainer>
       {service.status === 'loading' && <div>Loading...</div>}
       {service.status === 'loaded' &&
-        service.payload &&
-        service.payload.detailedResults &&
         service.payload.detailedResults.map((pokemon) => (
           <PokemonCard
             name={pokemon.name}

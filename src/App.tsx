@@ -21,9 +21,9 @@ const App: React.FC<{}> = (): JSX.Element => {
       <h1>Poke-World</h1>
       <div>
         Offset:
-        <input type="number" onChange={(event) => setOffset(Number(event.target.value))} />
+        <input type="text" onChange={(event) => setOffset(Number(event.target.value))} />
         Limit:
-        <input type="number" onChange={(event) => setLimit(Number(event.target.value))} />
+        <input type="text" onChange={(event) => setLimit(Number(event.target.value))} />
         Type:
         <input type="text" onChange={(event) => setType(event.target.value)} />
         Number of Evolutions:
