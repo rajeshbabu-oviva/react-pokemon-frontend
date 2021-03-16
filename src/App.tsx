@@ -10,7 +10,7 @@ interface IAppOwnProps {
 const App: React.FC<IAppOwnProps> = (): JSX.Element => {
   return (
     <div className="App">
-      <p>Hi, Rajesh is this working</p>
+      <h1>Poke-World</h1>
       <PokemonList />
     </div>
   );

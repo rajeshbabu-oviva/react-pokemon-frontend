@@ -1,6 +1,8 @@
 import React from 'react';
+import styled from 'styled-components';
 import useGetPokeMonService from '../hooks/useGetPokemonService';
 import { IUrlQueryParams } from '../interfaces/Pokemon';
+import PokemonCard from './PokemonCard';
 
 interface IPokemonListOwnProps {
   limit?: number;
@@ -24,6 +26,13 @@ function makePokemonUrl(urlQueryParams: IUrlQueryParams): string {
   return pokemonUrl;
 }
 
+const PokemonListContainer = styled.div`
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const PokemonList: React.FC<IPokemonListOwnProps> = (): JSX.Element => {
   const urlQueryParams: IUrlQueryParams = {
     limit: 10,
@@ -33,19 +42,22 @@ const PokemonList: React.FC<IPokemonListOwnProps> = (): JSX.Element => {
   const service = useGetPokeMonService(pokemonUrl);
 
   return (
-    <div>
+    <PokemonListContainer>
       {service.status === 'loading' && <div>Loading...</div>}
       {service.status === 'loaded' &&
         service.payload &&
         service.payload.detailedResults &&
         service.payload.detailedResults.map((pokemon) => (
-          <div>
-            <img src={pokemon.imageUrl} alt="pokemon information" />
-            <div key={pokemon.id}>{pokemon.name}</div>
-          </div>
+          <PokemonCard
+            name={pokemon.name}
+            types={pokemon.types}
+            numberOfEvolutions={pokemon.numberOfEvolutions}
+            id={pokemon.id}
+            imageUrl={pokemon.imageUrl}
+          />
         ))}
       {service.status === 'error' && <div> Error occured: {service.error.message}</div>}
-    </div>
+    </PokemonListContainer>
   );
 };
 
