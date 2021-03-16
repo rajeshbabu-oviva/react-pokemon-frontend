@@ -42,7 +42,6 @@ const PokemonList: React.FC<IPokemonSearchParams> = ({
     noOfEvolutions,
   };
 
-  console.log('inital data incoming ', urlQueryParams);
   const pokemonUrl = makePokemonUrl(urlQueryParams);
   const service = useGetPokeMonService(pokemonUrl);
 
