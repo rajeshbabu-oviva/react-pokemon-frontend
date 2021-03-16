@@ -17,5 +17,12 @@ export interface IUrlQueryParams {
   limit: number;
   offset: number;
   type?: string;
-  noOfEvolutions?: number;
+  noOfEvolutions?: string | undefined;
+}
+
+export interface IPokemonSearchParams {
+  limit: number;
+  offset: number;
+  type?: string;
+  numberOfEvolutions?: string | undefined;
 }

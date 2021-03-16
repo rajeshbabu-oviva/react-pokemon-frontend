@@ -1,13 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import useGetPokeMonService from '../hooks/useGetPokemonService';
-import { IUrlQueryParams } from '../interfaces/Pokemon';
+import { IUrlQueryParams, IPokemonSearchParams } from '../interfaces/Pokemon';
 import PokemonCard from './PokemonCard';
-
-interface IPokemonListOwnProps {
-  limit?: number;
-  offset?: number;
-}
 
 const BASE_URL = 'http://localhost:7889/pokemon?';
 
@@ -19,7 +15,7 @@ function makePokemonUrl(urlQueryParams: IUrlQueryParams): string {
     pokemonUrl = `${pokemonUrl}&type=${type}`;
   }
 
-  if (noOfEvolutions || noOfEvolutions === 0) {
+  if (noOfEvolutions || noOfEvolutions === '0') {
     pokemonUrl = `${pokemonUrl}&noOfEvolutions=${noOfEvolutions}`;
   }
 
@@ -33,11 +29,20 @@ const PokemonListContainer = styled.div`
   align-items: center;
 `;
 
-const PokemonList: React.FC<IPokemonListOwnProps> = (): JSX.Element => {
+const PokemonList: React.FC<IPokemonSearchParams> = ({
+  limit,
+  offset,
+  type,
+  numberOfEvolutions: noOfEvolutions,
+}): JSX.Element => {
   const urlQueryParams: IUrlQueryParams = {
-    limit: 10,
-    offset: 0,
+    limit,
+    offset,
+    type,
+    noOfEvolutions,
   };
+
+  console.log('inital data incoming ', urlQueryParams);
   const pokemonUrl = makePokemonUrl(urlQueryParams);
   const service = useGetPokeMonService(pokemonUrl);
 
